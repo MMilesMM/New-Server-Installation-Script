@@ -14,7 +14,7 @@ function display_menu() {
 function option_1() {
     echo "installing Apache2 and PHP"
     # Installation commands
-    sudo apt updat && sudo apt upgrade -y
+    sudo apt update && sudo apt upgrade -y
     sudo apt install apache2 -y
     sudo apt install php libapache2-mod-php php-mysql
     sudo apt install php-{zip,curl,bcmath,cli,common,imap,intl,json,xml,imagick} -y
