@@ -39,6 +39,10 @@ function option_2() {
 function option_3() {
     echo "Installing custom Apache2 config with SSL options"
    # Installation commands
+   DIR=/etc/letsencrypt
+if [ -d "$DIR" ];
+then
+    echo "$DIR directory exists."
    sudo apt install wget curl -y
    sudo a2enmod headers ssl
    sudo a2enmod rewrite
@@ -54,7 +58,13 @@ function option_3() {
    sudo mv security.conf /etc/apache2/conf-available
    sudo a2enconf security.conf
    sudo systemctl restart apache2
-    echo "Apache config installed!"
+   echo "Apache config installed!"
+else
+	echo "$DIR directory does not exist."
+ main
+fi
+   
+    
 }
 
 # Option 4
