@@ -47,7 +47,7 @@ function option_2() {
     while true; do
     read -p "Would you like to configure cloudlfare now?" yn
     case $yn in
-        [Yy]* ) mkdir -p ~/.secrets/certbot; wget -p ~/.secrets/certbot https://raw.github.com ; exit;;
+        [Yy]* ) mkdir -p ~/.secrets/certbot; wget -p ~/.secrets/certbot https://raw.githubusercontent.com/MMilesMM/new_server_script/main/files/cloudflare.ini; chmod 600 ~/.secrets/certbot/cloudflare.ini;return;;
         [Nn]* ) return;;
         * ) echo -e "${green}Please answer yes or no.${clear}";;
     esac
