@@ -1,4 +1,13 @@
 #!/bin/bash
+
+#    _   _                 ____                             ___           _        _ _   ____            _       _   
+#   | \ | | _____      __ / ___|  ___ _ ____   _____ _ __  |_ _|_ __  ___| |_ __ _| | | / ___|  ___ _ __(_)_ __ | |_ 
+#   |  \| |/ _ \ \ /\ / / \___ \ / _ \ '__\ \ / / _ \ '__|  | || '_ \/ __| __/ _` | | | \___ \ / __| '__| | '_ \| __|
+#   | |\  |  __/\ V  V /   ___) |  __/ |   \ V /  __/ |     | || | | \__ \ || (_| | | |  ___) | (__| |  | | |_) | |_ 
+#   |_| \_|\___| \_/\_/   |____/ \___|_|    \_/ \___|_|    |___|_| |_|___/\__\__,_|_|_| |____/ \___|_|  |_| .__/ \__|
+#                                                                                                         |_|        
+# Author @MMilesMM
+
 #variables
 # Set the color variable
 red='\033[0;31m'
@@ -19,7 +28,6 @@ clear='\033[0m'
 #Options
 command 1> /dev/null #Show console output
 
-# Function to display the menu
 function display_menu() {
     echo "Menu for Installing Programs"
     echo "1. Install Apache2, PHP with common modules and MySQL Server"
