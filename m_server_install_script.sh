@@ -50,7 +50,7 @@ function option_2() {
     sudo ln -s /snap/bin/certbot /usr/bin/certbot
     sudo snap set certbot trust-plugin-with-root=ok
     sudo snap install certbot-dns-cloudflare
-    echo -e -n "${bg_blue}Would you like to configure cloudlfare now? y or n"
+    echo -e -n "${bg_blue}Would you like to configure cloudlfare now? y/n"
         echo -e -n "${clear}"
         read -n 1 -r
     echo    # (optional) move to a new line
@@ -61,7 +61,7 @@ function option_2() {
         sudo chmod 600 /root/.secrets/certbot/cloudflare.ini
         sudo nano /root/.secrets/certbot/cloudflare.ini
         echo -e "${green}Certbot with cloudflare config and snap installed successfully!${clear}"
-        echo -e -n "${bg_blue}Would you like to configure cloudlfare now? y or n"
+        echo -e -n "${bg_blue}Would you like to create the certificates now? y/n"
         echo -e -n "${clear}"
         read -n 1 -r
             echo    # (optional) move to a new line
