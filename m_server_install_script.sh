@@ -96,10 +96,10 @@ then
     sudo apt install wget curl -y
     sudo a2enmod headers ssl rewrite actions
     sudo systemctl restart apache2
-    sudo wget -O -P /etc/ssl https://raw.githubusercontent.com/MMilesMM/new_server_script/main/files/dhparams.pem
-    sudo wget -O -P  /etc/letsencrypt https://raw.githubusercontent.com/MMilesMM/new_server_script/main/files/options-ssl-apache.conf
-    sudo wget -O -P /etc/apache2/conf-available https://raw.githubusercontent.com/MMilesMM/new_server_script/main/files/security.conf
-    sudo wget -O -P /etc/apache2/sites-available/ https://raw.githubusercontent.com/MMilesMM/new_server_script/main/files/default_vhost.conf
+    sudo wget -O /etc/ssl/dhparams.pem https://raw.githubusercontent.com/MMilesMM/new_server_script/main/files/dhparams.pem
+    sudo wget -O /etc/letsencrypt/options-ssl-apache.conf https://raw.githubusercontent.com/MMilesMM/new_server_script/main/files/options-ssl-apache.conf
+    sudo wget -O /etc/apache2/conf-available/security.conf https://raw.githubusercontent.com/MMilesMM/new_server_script/main/files/security.conf
+    sudo wget -O /etc/apache2/sites-available/default_vhost.conf https://raw.githubusercontent.com/MMilesMM/new_server_script/main/files/default_vhost.conf
     sudo a2enconf security.conf
     sudo systemctl restart apache2
     echo -e "${green}Apache config installed!${clear}"
