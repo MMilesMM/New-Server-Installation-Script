@@ -32,7 +32,7 @@ function option_1() {
     sudo apt install php libapache2-mod-php php-mysql
     sudo apt install php-{zip,curl,bcmath,cli,common,imap,intl,json,xml,imagick} -y
     sudo apt install mysql-server -y
-    echo "Apache und PHP sccessfully installed!"
+    echo -e "${green}Apache und PHP sccessfully installed!${clear}"
 }
 
 # Option 2
@@ -45,7 +45,7 @@ function option_2() {
     sudo snap set certbot trust-plugin-with-root=ok
     sudo snap install certbot-dns-cloudflare
     
-    echo "Certbot and snap installed successfully!"
+    echo -e "${green}Certbot and snap installed successfully!${clear}"
 }
 
 # Option 3
@@ -71,7 +71,7 @@ then
    sudo mv security.conf /etc/apache2/conf-available
    sudo a2enconf security.conf
    sudo systemctl restart apache2
-   echo "Apache config installed!"
+   echo -e "${green}Apache config installed!${clear}"
 else
  echo -e "${red}$DIR directory does not exist! Please finish the installation of certbot!${clear}"
  echo -e "${magenta}returning to main menu${clear}"
@@ -86,7 +86,7 @@ function option_4() {
     # Installation commands
     sudo nano /etc/ssh/sshd_config
     sudo systemctl restart ssh sshd
-    echo "SSH config sucessfully configured"
+    echo -e "${green}SSH config sucessfully configured${clear}"
 }
 
 # Main function
@@ -108,11 +108,11 @@ function main() {
                 option_4
                 ;;
             5)
-                echo "Exiting..."
+                echo "${red}Exiting..."
                 break
                 ;;
             *)
-                echo "Invalid choice. Please try again."
+                echo "${red}Invalid choice. Please try again."
                 ;;
         esac
         echo
@@ -121,17 +121,3 @@ function main() {
 
 # Call the main function
 main
-
-#variables
-# Set the color variable
-red='\033[0;31m'
-green='\033[0;32m'
-yellow='\033[0;33m'
-blue='\033[0;34m'
-magenta='\033[0;35m'
-cyan='\033[0;36m'
-# Clear the color after that
-clear='\033[0m'
-
-#Options
-command 1> /dev/null
