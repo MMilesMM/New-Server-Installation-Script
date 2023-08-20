@@ -17,7 +17,7 @@ bg_cyan='\033[0;46m'
 clear='\033[0m'
 
 #Options
-command 1> /dev/null
+#command 1> /dev/null
 
 # Function to display the menu
 function display_menu() {
