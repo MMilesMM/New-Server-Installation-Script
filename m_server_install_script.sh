@@ -40,6 +40,10 @@ function option_3() {
     echo "Installing custom Apache2 config with SSL options"
    # Installation commands
    sudo apt install wget curl -y
+   sudo a2enmod headers ssl
+   sudo a2enmod rewrite
+   sudo a2enmod actions
+   sudo systemctl restart apache2
    sudo mkdir /tmp/mscript
    sudo /tmp/mscript
    sudo wget https://raw.githubusercontent.com/MMilesMM/new_server_script/main/files/dhparams.pem
