@@ -59,7 +59,7 @@ function option_2() {
         sudo chmod 600 /root/.secrets/certbot/cloudflare.ini
         sudo nano /root/.secrets/certbot/cloudflare.ini
         echo -e "${green}Certbot with cloudflare config and snap installed successfully!${clear}"
-        read -p "${bg_blue}Would you like to create the certificaes? y or n${clear} -n 1 -r
+        read -p "${bg_blue}Would you like to create the certificaes? y or n${clear}" -n 1 -r
             echo    # (optional) move to a new line
             if [[ $REPLY =~ ^[Yy]$ ]]
             then
