@@ -16,8 +16,8 @@ command 1> /dev/null
 # Function to display the menu
 function display_menu() {
     echo "Menu for Installing Programs"
-    echo "1. Install Apache2 und PHP with common modules"
-    echo "2. Install certbot"
+    echo "1. Install Apache2, PHP with common modules and MySQL Server"
+    echo "2. Install certbot with cloudflare addon"
     echo "3. Download pre-made default config for apache2 (vhost, ssl extra)"
     echo "4. Edit SSH config to allow root ssh"
     echo "5. Exit"
@@ -44,6 +44,14 @@ function option_2() {
     sudo ln -s /snap/bin/certbot /usr/bin/certbot
     sudo snap set certbot trust-plugin-with-root=ok
     sudo snap install certbot-dns-cloudflare
+    while true; do
+    read -p "Would you like to configure cloudlfare now?" yn
+    case $yn in
+        [Yy]* ) mkdir -p ~/.secrets/certbot; wget -p ~/.secrets/certbot https://raw.github.com ; exit;;
+        [Nn]* ) return;;
+        * ) echo -e "${green}Please answer yes or no.${clear}";;
+    esac
+done#   
     
     echo -e "${green}Certbot and snap installed successfully!${clear}"
 }
