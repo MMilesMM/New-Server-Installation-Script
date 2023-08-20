@@ -44,16 +44,20 @@ function option_2() {
     sudo ln -s /snap/bin/certbot /usr/bin/certbot
     sudo snap set certbot trust-plugin-with-root=ok
     sudo snap install certbot-dns-cloudflare
-    read -p "Would you like to configure cloudlfare now?" yn
+    read -p "Would you like to configure cloudlfare now?" y or n
     echo    # (optional) move to a new line
     if [[ $REPLY =~ ^[Yy]$ ]]
     then
-        mkdir -p ~/.secrets/certbot
-        wget -p ~/.secrets/certbot https://raw.githubusercontent.com/MMilesMM/new_server_script/main/files/cloudflare.ini
-        chmod 600 ~/.secrets/certbot/cloudflare.ini
+        sudo mkdir -p /root/.secrets/certbot
+        sudo wget -p /root.secrets/certbot https://raw.githubusercontent.com/MMilesMM/new_server_script/main/files/cloudflare.ini
+        sudo chmod 600 /root/.secrets/certbot/cloudflare.ini
+        sudo nano /root/.secrets/certbot/cloudflare.ini
+        echo -e "${green}Certbot with cloudflare config and snap installed successfully!${clear}"
+    else
+        echo -e "${green}Certbot and snap installed successfully!${clear}"
     fi
     
-    echo -e "${green}Certbot and snap installed successfully!${clear}"
+    
 }
 
 # Option 3
