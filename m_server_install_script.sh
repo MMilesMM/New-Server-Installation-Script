@@ -32,7 +32,7 @@ function option_1() {
     sudo apt install php libapache2-mod-php php-mysql
     sudo apt install php-{zip,curl,bcmath,cli,common,imap,intl,json,xml,imagick} -y
     sudo apt install mysql-server -y
-    echo -e "${green}Apache und PHP sccessfully installed!${clear}"
+    echo -e "${green}Apache,PHP and MySQL sccessfully installed!${clear}"
 }
 
 # Option 2
