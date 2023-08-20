@@ -116,7 +116,7 @@ then
                 sudo chown -R www-data:www-data /var/www
                 sudo cp /etc/apache2/sites-available/default_vhost.conf /etc/apache2/sites-available/$apachedomain.conf
                 sudo nano /etc/apache2/sites-available/$apachedomain.conf
-                sudo a2ensite /etc/apache2/sites-available/$apachedomain.conf
+                sudo a2ensite $apachedomain
                 sudo systemctl reload apache2
                 echo -e "${green}Domain added and apache reloaded!${clear}"
             fi
