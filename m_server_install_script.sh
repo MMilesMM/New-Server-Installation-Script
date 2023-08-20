@@ -58,7 +58,12 @@ function option_2() {
             if [[ $REPLY =~ ^[Yy]$ ]]
             then
                 read -p "please enter the domain you would like to add: " domain
-                echo "hat geklappt!: $domain" 
+                certbot certonly \
+                --dns-cloudflare \
+                --dns-cloudflare-credentials /root/.secrets/certbot/cloudflare.ini \
+                --dns-cloudflare-propagation-seconds 15 \
+                -d $domain \
+                -d *.$domain
             fi
     else
         echo -e "${green}Certbot and snap installed successfully!${clear}"
