@@ -50,7 +50,7 @@ function option_2() {
     sudo ln -s /snap/bin/certbot /usr/bin/certbot
     sudo snap set certbot trust-plugin-with-root=ok
     sudo snap install certbot-dns-cloudflare
-    read -p "\033[0;44mWould you like to configure cloudlfare now? y or n\033[0m" -n 1 -r
+    read -p '^[[31mFoobar^[[0m: ' -n 1 -r
     echo    # (optional) move to a new line
     if [[ $REPLY =~ ^[Yy]$ ]]
     then
