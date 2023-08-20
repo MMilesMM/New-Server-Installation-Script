@@ -53,6 +53,13 @@ function option_2() {
         sudo chmod 600 /root/.secrets/certbot/cloudflare.ini
         sudo nano /root/.secrets/certbot/cloudflare.ini
         echo -e "${green}Certbot with cloudflare config and snap installed successfully!${clear}"
+        read -p "Would you like to create the certificaes?" -n 1 -r
+            echo    # (optional) move to a new line
+            if [[ $REPLY =~ ^[Yy]$ ]]
+            then
+                read -p "please enter the domain you would like to add: " domain
+                echo hat geklappt!
+            fi
     else
         echo -e "${green}Certbot and snap installed successfully!${clear}"
     fi
@@ -73,14 +80,10 @@ then
    sudo a2enmod rewrite
    sudo a2enmod actions
    sudo systemctl restart apache2
-   sudo mkdir /tmp/mscript
-   sudo /tmp/mscript
-   sudo wget https://raw.githubusercontent.com/MMilesMM/new_server_script/main/files/dhparams.pem
-   sudo wget https://raw.githubusercontent.com/MMilesMM/new_server_script/main/files/options-ssl-apache.conf
-   sudo wget https://raw.githubusercontent.com/MMilesMM/new_server_script/main/files/security.conf
-   sudo mv dhparams.pem /etc/ssl
-   sudo mv options-ssl-apache.conf /etc/letsencrypt
-   sudo mv security.conf /etc/apache2/conf-available
+   sudo wget -P /etc/ssl https://raw.githubusercontent.com/MMilesMM/new_server_script/main/files/dhparams.pem
+   sudo wget -P  /etc/letsencrypt https://raw.githubusercontent.com/MMilesMM/new_server_script/main/files/options-ssl-apache.conf
+   sudo wget -P /etc/apache2/conf-available https://raw.githubusercontent.com/MMilesMM/new_server_script/main/files/security.conf
+   sudo wget -P /etc/apache2/sites-enabled/ https://raw.githubusercontent.com/MMilesMM/new_server_script/main/files/default_vhost.conf
    sudo a2enconf security.conf
    sudo systemctl restart apache2
    echo -e "${green}Apache config installed!${clear}"
