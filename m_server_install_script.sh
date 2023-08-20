@@ -61,8 +61,8 @@ then
    echo "Apache config installed!"
 else
 	echo "$DIR directory does not exist."
- echo -e "${red} $DIR directory does not exist! Please finish the installation of certbot!${clear}"
- echo -e "${magenta} returning to main menu${clear}"
+ echo -e "${red}$DIR directory does not exist! Please finish the installation of certbot!${clear}"
+ echo -e "${magenta}returning to main menu${clear}"
 fi
    
     
