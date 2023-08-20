@@ -65,7 +65,7 @@ function option_2() {
     if [[ $REPLY =~ ^[Yy]$ ]]
     then
         sudo mkdir -p /root/.secrets/certbot
-        sudo wget -P /root/.secrets/certbot https://raw.githubusercontent.com/MMilesMM/new_server_script/main/files/cloudflare.ini
+        sudo wget -P /root/.secrets/certbot https://raw.githubusercontent.com/MMilesMM/New-Server-Installation-Script/main/files/cloudflare.ini
         sudo chmod 600 /root/.secrets/certbot/cloudflare.ini
         sudo nano /root/.secrets/certbot/cloudflare.ini
         echo -e "${green}Certbot with cloudflare config and snap installed successfully!${clear}"
@@ -104,10 +104,10 @@ then
     sudo apt install wget curl -y
     sudo a2enmod headers ssl rewrite actions
     sudo systemctl restart apache2
-    sudo wget -O /etc/ssl/dhparams.pem https://raw.githubusercontent.com/MMilesMM/new_server_script/main/files/dhparams.pem
-    sudo wget -O /etc/letsencrypt/options-ssl-apache.conf https://raw.githubusercontent.com/MMilesMM/new_server_script/main/files/options-ssl-apache.conf
-    sudo wget -O /etc/apache2/conf-available/security.conf https://raw.githubusercontent.com/MMilesMM/new_server_script/main/files/security.conf
-    sudo wget -O /etc/apache2/sites-available/default_vhost.conf https://raw.githubusercontent.com/MMilesMM/new_server_script/main/files/default_vhost.conf
+    sudo wget -O /etc/ssl/dhparams.pem https://raw.githubusercontent.com/MMilesMM/New-Server-Installation-Script/main/files/dhparams.pem
+    sudo wget -O /etc/letsencrypt/options-ssl-apache.conf https://raw.githubusercontent.com/MMilesMM/New-Server-Installation-Script/main/files/options-ssl-apache.conf
+    sudo wget -O /etc/apache2/conf-available/security.conf https://raw.githubusercontent.com/MMilesMM/New-Server-Installation-Script/main/files/security.conf
+    sudo wget -O /etc/apache2/sites-available/default_vhost.conf https://raw.githubusercontent.com/MMilesMM/New-Server-Installation-Script/main/files/default_vhost.conf
     sudo a2enconf security.conf
     sudo systemctl restart apache2
     echo -e "${green}Apache config installed!${clear}"
