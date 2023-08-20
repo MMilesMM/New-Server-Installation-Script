@@ -39,6 +39,17 @@ function option_2() {
 function option_3() {
     echo "Installing custom Apache2 config with SSL options"
    # Installation commands
+   sudo apt install wget curl -y
+   sudo mkdir /tmp/mscript
+   sudo /tmp/mscript
+   sudo wget https://raw.githubusercontent.com/MMilesMM/new_server_script/main/files/dhparams.pem
+   sudo wget https://raw.githubusercontent.com/MMilesMM/new_server_script/main/files/options-ssl-apache.conf
+   sudo wget https://raw.githubusercontent.com/MMilesMM/new_server_script/main/files/security.conf
+   sudo mv dhparams.pem /etc/ssl
+   sudo mv options-ssl-apache.conf /etc/letsencrypt
+   sudo mv security.conf /etc/apache2/conf-available
+   sudo a2enconf security.conf
+   sudo systemctl restart apache2
     echo "Apache config installed!"
 }
 
