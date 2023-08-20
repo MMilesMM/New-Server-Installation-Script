@@ -13,7 +13,7 @@ function display_menu() {
 # Option 1
 function option_1() {
     echo "installing Apache2 and PHP"
-    # Add your installation commands for Program A here
+    # Installation commands
     sudo apt updat && sudo apt upgrade -y
     sudo apt install apache2 -y
     sudo apt install php libapache2-mod-php php-mysql
@@ -25,7 +25,7 @@ function option_1() {
 # Option 2
 function option_2() {
     echo "Installting certbot and snap"
-    # Add your installation commands for Program B here
+    # Installation commands
     sudo apt install snapd -y
     sudo snap install --classic certbot
     sudo ln -s /snap/bin/certbot /usr/bin/certbot
@@ -37,17 +37,18 @@ function option_2() {
 
 # Option 3
 function option_3() {
-    echo "Installing Program C..."
-    # Add your installation commands for Program C here
-    echo "Program C installed successfully!"
+    echo "Installing custom Apache2 config with SSL options"
+   # Installation commands
+    echo "Apache config installed!"
 }
 
 # Option 4
 function option_4() {
     echo "Opening SSH config..."
+    # Installation commands
     sudo nano /etc/ssh/sshd_config
     sudo systemctl restart ssh sshd
-    echo "SSH erfolgreich angepasst!"
+    echo "SSH config sucessfully configured"
 }
 
 # Main function
