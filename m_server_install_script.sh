@@ -49,7 +49,7 @@ function option_2() {
     if [[ $REPLY =~ ^[Yy]$ ]]
     then
         sudo mkdir -p /root/.secrets/certbot
-        sudo wget -p /root.secrets/certbot https://raw.githubusercontent.com/MMilesMM/new_server_script/main/files/cloudflare.ini
+        sudo wget -p /root/.secrets/certbot https://raw.githubusercontent.com/MMilesMM/new_server_script/main/files/cloudflare.ini
         sudo chmod 600 /root/.secrets/certbot/cloudflare.ini
         sudo nano /root/.secrets/certbot/cloudflare.ini
         echo -e "${green}Certbot with cloudflare config and snap installed successfully!${clear}"
