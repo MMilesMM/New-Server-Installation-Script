@@ -46,12 +46,13 @@ function option_2() {
     sudo snap install certbot-dns-cloudflare
     while true; do
     read -p "Would you like to configure cloudlfare now?" yn
-    case $yn in
-        [Yy]* ) mkdir -p ~/.secrets/certbot; wget -p ~/.secrets/certbot https://raw.githubusercontent.com/MMilesMM/new_server_script/main/files/cloudflare.ini; chmod 600 ~/.secrets/certbot/cloudflare.ini;return;;
-        [Nn]* ) return;;
-        * ) echo -e "${green}Please answer yes or no.${clear}";;
-    esac
-done#   
+    echo    # (optional) move to a new line
+    if [[ $REPLY =~ ^[Yy]$ ]]
+    then
+    mkdir -p ~/.secrets/certbot
+    wget -p ~/.secrets/certbot https://raw.githubusercontent.com/MMilesMM/new_server_script/main/files/cloudflare.ini
+    chmod 600 ~/.secrets/certbot/cloudflare.ini
+    fi
     
     echo -e "${green}Certbot and snap installed successfully!${clear}"
 }
