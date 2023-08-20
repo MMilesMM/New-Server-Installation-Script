@@ -43,7 +43,7 @@ function option_1() {
 
 # Option 2
 function option_2() {
-    echo "Installting certbot and snap"
+    echo "Installing certbot and snap"
     # Installation commands
     sudo apt install snapd curl wget -y
     sudo snap install --classic certbot
@@ -53,7 +53,7 @@ function option_2() {
     echo -e -n "${bg_blue}Would you like to configure cloudlfare now? y/n"
         echo -e -n "${clear}"
         read -n 1 -r
-    echo    # (optional) move to a new line
+    echo
     if [[ $REPLY =~ ^[Yy]$ ]]
     then
         sudo mkdir -p /root/.secrets/certbot
@@ -64,10 +64,12 @@ function option_2() {
         echo -e -n "${bg_blue}Would you like to create the certificates now? y/n"
         echo -e -n "${clear}"
         read -n 1 -r
-            echo    # (optional) move to a new line
+            echo
             if [[ $REPLY =~ ^[Yy]$ ]]
             then
-                read -p "${bg_blue}please enter the domain you would like to add: ${clear}" domain
+                echo -e -n "${bg_blue}Please enter the domain you would like to add: "
+                echo -e -n "${clear}"
+                read domain
                 sudo certbot certonly \
                 --dns-cloudflare \
                 --dns-cloudflare-credentials /root/.secrets/certbot/cloudflare.ini \
@@ -91,18 +93,34 @@ function option_3() {
 if [ -d "$DIR" ];
 then
     echo "$DIR directory exists."
-   sudo apt install wget curl -y
-   sudo a2enmod headers ssl
-   sudo a2enmod rewrite
-   sudo a2enmod actions
-   sudo systemctl restart apache2
-   sudo wget -P /etc/ssl https://raw.githubusercontent.com/MMilesMM/new_server_script/main/files/dhparams.pem
-   sudo wget -P  /etc/letsencrypt https://raw.githubusercontent.com/MMilesMM/new_server_script/main/files/options-ssl-apache.conf
-   sudo wget -P /etc/apache2/conf-available https://raw.githubusercontent.com/MMilesMM/new_server_script/main/files/security.conf
-   sudo wget -P /etc/apache2/sites-enabled/ https://raw.githubusercontent.com/MMilesMM/new_server_script/main/files/default_vhost.conf
-   sudo a2enconf security.conf
-   sudo systemctl restart apache2
-   echo -e "${green}Apache config installed!${clear}"
+    sudo apt install wget curl -y
+    sudo a2enmod headers ssl rewrite actions
+    sudo systemctl restart apache2
+    sudo wget -P /etc/ssl https://raw.githubusercontent.com/MMilesMM/new_server_script/main/files/dhparams.pem
+    sudo wget -P  /etc/letsencrypt https://raw.githubusercontent.com/MMilesMM/new_server_script/main/files/options-ssl-apache.conf
+    sudo wget -P /etc/apache2/conf-available https://raw.githubusercontent.com/MMilesMM/new_server_script/main/files/security.conf
+    sudo wget -P /etc/apache2/sites-available/ https://raw.githubusercontent.com/MMilesMM/new_server_script/main/files/default_vhost.conf
+    sudo a2enconf security.conf
+    sudo systemctl restart apache2
+    echo -e "${green}Apache config installed!${clear}"
+    echo -e -n "${bg_blue}Would you like to edit the default config? y/n"
+        echo -e -n "${clear}"
+        read -n 1 -r
+            echo
+            if [[ $REPLY =~ ^[Yy]$ ]]
+            then
+                echo -e -n "${bg_blue}Please enter the name of the domain you'll add: "
+                echo -e -n "${clear}"
+                read apachedomain
+                sudo mkdir -p /var/www/$apachedomain
+                sudo chown -R www:data /var/www
+                sudo cp /etc/apache2/sites-available/default_vhost.conf /etc/apache2/sites-available/$apachedomain.conf
+                sudo nano /etc/apache2/sites-available/$apachedomain.conf
+                sudo a2enmod /etc/apache2/sites-available/$apachedomain.conf
+                sudo systemctl reload apache2
+                echo -e "${green}Domain added and apache reloaded!${clear}"
+            fi
+
 else
  echo -e "${red}$DIR directory does not exist! Please finish the installation of certbot!${clear}"
  echo -e "${magenta}returning to main menu${clear}"
