@@ -108,11 +108,11 @@ function main() {
                 option_4
                 ;;
             5)
-                echo "${red}Exiting..."
+                echo -e "${red}Exiting..."
                 break
                 ;;
             *)
-                echo "${red}Invalid choice. Please try again."
+                echo -e "${red}Invalid choice. Please try again."
                 ;;
         esac
         echo
