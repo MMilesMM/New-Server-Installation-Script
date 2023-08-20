@@ -7,6 +7,12 @@ yellow='\033[0;33m'
 blue='\033[0;34m'
 magenta='\033[0;35m'
 cyan='\033[0;36m'
+bg_red='\033[0;41m'
+bg_green='\033[0;42m'
+bg_yellow='\033[0;43m'
+bg_blue='\033[0;44m'
+bg_magenta='\033[0;45m'
+bg_cyan='\033[0;46m'
 # Clear the color after that
 clear='\033[0m'
 
@@ -44,7 +50,7 @@ function option_2() {
     sudo ln -s /snap/bin/certbot /usr/bin/certbot
     sudo snap set certbot trust-plugin-with-root=ok
     sudo snap install certbot-dns-cloudflare
-    read -p "Would you like to configure cloudlfare now? y or n" -n 1 -r
+    read -p "${bg_blue}Would you like to configure cloudlfare now? y or n${clear}" -n 1 -r
     echo    # (optional) move to a new line
     if [[ $REPLY =~ ^[Yy]$ ]]
     then
@@ -53,12 +59,12 @@ function option_2() {
         sudo chmod 600 /root/.secrets/certbot/cloudflare.ini
         sudo nano /root/.secrets/certbot/cloudflare.ini
         echo -e "${green}Certbot with cloudflare config and snap installed successfully!${clear}"
-        read -p "Would you like to create the certificaes?" -n 1 -r
+        read -p "${bg_blue}Would you like to create the certificaes? y or n${clear} -n 1 -r
             echo    # (optional) move to a new line
             if [[ $REPLY =~ ^[Yy]$ ]]
             then
-                read -p "please enter the domain you would like to add: " domain
-                certbot certonly \
+                read -p "${bg_blue}please enter the domain you would like to add: ${clear}" domain
+                sudo certbot certonly \
                 --dns-cloudflare \
                 --dns-cloudflare-credentials /root/.secrets/certbot/cloudflare.ini \
                 --dns-cloudflare-propagation-seconds 15 \
