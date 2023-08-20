@@ -28,7 +28,7 @@ function option_1() {
     echo "installing Apache2 and PHP"
     # Installation commands
     sudo apt update && sudo apt upgrade -y
-    sudo apt install apache2 -y
+    sudo apt install apache2 wget curl -y
     sudo apt install php libapache2-mod-php php-mysql
     sudo apt install php-{zip,curl,bcmath,cli,common,imap,intl,json,xml,imagick} -y
     sudo apt install mysql-server -y
@@ -39,7 +39,7 @@ function option_1() {
 function option_2() {
     echo "Installting certbot and snap"
     # Installation commands
-    sudo apt install snapd -y
+    sudo apt install snapd curl wget -y
     sudo snap install --classic certbot
     sudo ln -s /snap/bin/certbot /usr/bin/certbot
     sudo snap set certbot trust-plugin-with-root=ok
@@ -105,7 +105,7 @@ function option_4() {
 function main() {
     while true; do
         display_menu
-        read -p "Enter your choice (1-4): " choice
+        read -p "Enter your choice (1-5): " choice
         case $choice in
             1)
                 option_1
