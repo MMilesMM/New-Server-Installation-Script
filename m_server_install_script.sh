@@ -17,7 +17,7 @@ bg_cyan='\033[0;46m'
 clear='\033[0m'
 
 #Options
-#command 1> /dev/null
+command 1> /dev/null #Show console output
 
 # Function to display the menu
 function display_menu() {
@@ -74,6 +74,7 @@ function option_2() {
                 --dns-cloudflare-propagation-seconds 15 \
                 -d $domain \
                 -d *.$domain
+                echo -e "${green}Cloudflare certificate installed and configured!${clear}"
             fi
     else
         echo -e "${green}Certbot and snap installed successfully!${clear}"
