@@ -17,7 +17,7 @@ bg_cyan='\033[0;46m'
 clear='\033[0m'
 
 #Options
-#command 1> /dev/null #Show console output
+command 1> /dev/null #Show console output
 
 # Function to display the menu
 function display_menu() {
@@ -36,7 +36,7 @@ function option_1() {
     sudo apt update && sudo apt upgrade -y
     sudo apt install apache2 wget curl -y
     sudo apt install php libapache2-mod-php php-mysql
-    sudo apt install php-{zip,curl,bcmath,cli,common,imap,intl,json,xml,imagick,dom,fileinfo,hash,mbstring,openssl,pcre,sodium,zlib} -y
+    sudo apt install php-{zip,curl,bcmath,cli,common,imap,intl,json,xml,imagick,dom,fileinfo,mbstring} -y
     sudo apt install mysql-server -y
     echo -e "${green}Apache,PHP and MySQL sccessfully installed!${clear}"
 }
