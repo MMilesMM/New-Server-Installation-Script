@@ -134,6 +134,7 @@ then
                 echo -e -n "${clear}"
                 read -n 1 -r
                 echo
+            fi
                     if [[ $REPLY =~ ^[Yy]$ ]]
                     then
                     sudo apt install unzip -y
@@ -141,8 +142,8 @@ then
                     sudo unzip /var/www/$apachedomain/latest-de_DE.zip -d /var/www/$apachedomain
                     sudo rm /var/www/$apachedomain/latest-de_DE.zip
 
-                    fi
                 echo -e -n "${bg_blue}Wordpress not installed, returning to main menu...${clear}"
+                fi
 
 else
  echo -e "${red}$DIR directory does not exist! Please finish the installation of certbot!${clear}"
