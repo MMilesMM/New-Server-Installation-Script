@@ -191,7 +191,8 @@ function option_5() {
     word=/var/www/$wordpress
     if [ -d "$word" ];
     then
-        echo -e "${bg_blue}Folder $word already exists! Please remove the folder! Returning to main menu${clear}"
+        echo -e -n "${bg_blue}Folder $word already exists! Please remove the folder! Returning to main menu${clear}"
+        echo
         pause 'Press [Enter] key to continue...'
     else
         sudo apt install unzip -y
