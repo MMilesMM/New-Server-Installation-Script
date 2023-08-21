@@ -28,6 +28,11 @@ clear='\033[0m'
 #Options
 command 1> /dev/null #Show console output
 
+#Function
+function pause(){
+   read -p "$*"
+}
+
 function display_menu() {
     echo "Menu for Installing Programs"
     echo "1. Install Apache2, PHP with common modules and MySQL Server"
@@ -47,6 +52,7 @@ function option_1() {
     sudo apt install php-{zip,curl,bcmath,cli,common,imap,intl,json,xml,imagick,dom,fileinfo,mbstring} -y
     sudo apt install mysql-server -y
     echo -e "${green}Apache,PHP and MySQL sccessfully installed!${clear}"
+    pause 'Press [Enter] key to continue...'
 }
 
 # Option 2
@@ -125,7 +131,7 @@ then
                 sudo cp /etc/apache2/sites-available/default_vhost.conf /etc/apache2/sites-available/$apachedomain.conf
                 sudo nano /etc/apache2/sites-available/$apachedomain.conf
                 echo -e "${bg_blue}Please edit the apache2 config and AllowOverride All for the /var/www directory${clear}"
-                pause
+                pause 'Press [Enter] key to continue...'
                 sudo nano /etc/apache2/apache2.conf
                 sudo a2ensite $apachedomain
                 sudo systemctl reload apache2
@@ -137,12 +143,15 @@ then
             fi
                     if [[ $REPLY =~ ^[Yy]$ ]]
                     then
-                    sudo apt install unzip -y
-                    sudo wget -P /var/www/$apachedomain https://de.wordpress.org/latest-de_DE.zip
-                    sudo unzip /var/www/$apachedomain/latest-de_DE.zip -d /var/www/$apachedomain
-                    sudo rm /var/www/$apachedomain/latest-de_DE.zip
-
-                echo -e -n "${bg_blue}Wordpress not installed, returning to main menu...${clear}"
+                        sudo apt install unzip -y
+                        sudo wget -P /var/www/$apachedomain https://de.wordpress.org/latest-de_DE.zip
+                        sudo unzip /var/www/$apachedomain/latest-de_DE.zip -d /var/www/$apachedomain
+                        sudo mv /var/www/$apachedomain/wordpress/* /var/www/$apachedomain
+                        sudo rm /var/www/$apachedomain/latest-de_DE.zip
+                        sudo rm -r /var/www/$apachedomain/wordpress
+                        sudo chown -R www-data:www-data /var/www
+                    else
+                        echo -e -n "${bg_blue}Wordpress not installed, returning to main menu...${clear}"
                 fi
 
 else
