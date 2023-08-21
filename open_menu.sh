@@ -192,7 +192,7 @@ function option_5() {
     if [ -d "$word" ];
     then
         echo -e -n "${bg_blue}Folder $word already exists! Please remove the folder! Returning to main menu${clear}"
-        echo -e -n "${magenta}Returning to main menu...{clear}"
+        echo -e "${magenta}Returning to main menu...${clear}"
         echo
         pause 'Press [Enter] key to continue...'
     else
