@@ -246,6 +246,7 @@ function option_7() {
     read htuser
     sudo htpasswd -c /etc/phpmyadmin/.htpasswd $htuser
     sudo systemctl restart apache2
+    clear
     echo -e "${green}PhPMyAdmin installed! Returning to menu...${clear}"
 }
 
