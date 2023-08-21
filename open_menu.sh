@@ -34,7 +34,7 @@ function pause(){
 }
 
 function display_menu() {
-    echo -e "${cyan}Installation menu${clear}"
+    echo -e "${cyan}Installation menu ${clear}"
     echo "1. Install Apache2, PHP with common modules and MySQL Server"
     echo "2. Install certbot with cloudflare addon"
     echo "3. Download pre-made default config for apache2 (vhost, ssl extra)"
