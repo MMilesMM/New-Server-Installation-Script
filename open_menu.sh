@@ -47,15 +47,15 @@ function display_menu() {
 
 # Option 1
 function option_1() {
-    echo "installing Apache2 and PHP"
+    echo "Installaling Apache, PHP and MySQL..."
     # Installation commands
     sudo apt update && sudo apt upgrade -y
     sudo apt install apache2 wget curl -y
     sudo apt install php libapache2-mod-php php-mysql
     sudo apt install php-{zip,curl,bcmath,cli,common,imap,intl,json,xml,imagick,dom,fileinfo,mbstring} -y
     sudo apt install mysql-server -y
-    echo -e "${green}Apache,PHP and MySQL sccessfully installed!${clear}"
-    pause 'Press [Enter] key to continue...'
+    clear
+    echo -e "${green}Apache,PHP and MySQL sccessfully installed! Returning to menu...${clear}"
 }
 
 # Option 2
@@ -93,9 +93,11 @@ function option_2() {
                 --dns-cloudflare-propagation-seconds 15 \
                 -d $domain \
                 -d *.$domain
+                clear
                 echo -e "${green}Cloudflare certificate installed and configured!${clear}"
             fi
     else
+        clear
         echo -e "${green}Certbot and snap installed successfully!${clear}"
     fi
     
@@ -119,6 +121,7 @@ then
     sudo wget -O /etc/apache2/sites-available/default_vhost.conf https://raw.githubusercontent.com/MMilesMM/New-Server-Installation-Script/main/files/default_vhost.conf
     sudo a2enconf security.conf
     sudo systemctl restart apache2
+    clear
     echo -e "${green}Apache config installed!${clear}"
     echo -e -n "${bg_blue}Would you like to edit the default config? y/n"
         echo -e -n "${clear}"
@@ -159,16 +162,19 @@ then
                                 sudo rm /var/www/$apachedomain/latest-de_DE.zip
                                 sudo rm -r /var/www/$apachedomain/wordpress
                                 sudo chown -R www-data:www-data /var/www
+                                clear
                                 echo -e -n "${bg_blue}Wordpress successfully installed!, returning to main menu...${clear}"
                             fi
                     else
+                            clear
                             echo -e -n "${bg_blue}Wordpress not installed!, returning to main menu...${clear}"
                         
                 fi
 
 else
- echo -e "${red}$DIR directory does not exist! Please finish the installation of certbot!${clear}"
- echo -e "${magenta}returning to main menu...${clear}"
+    clear
+    echo -e "${red}$DIR directory does not exist! Please finish the installation of certbot!${clear}"
+    echo -e "${magenta}returning to main menu...${clear}"
 fi
    
     
@@ -180,6 +186,7 @@ function option_4() {
     # Installation commands
     sudo nano /etc/ssh/sshd_config
     sudo systemctl restart ssh sshd
+    clear
     echo -e "${green}SSH config sucessfully configured${clear}"
 }
 
@@ -206,6 +213,7 @@ function option_5() {
         sudo rm /var/www/$wordpress/latest-de_DE.zip
         sudo rm -r /var/www/$wordpress/wordpress
         sudo chown -R www-data:www-data /var/www
+        clear
         echo -e -n "${bg_blue}Wordpress successfully installed!, returning to main menu...${clear}"
     fi
 }
@@ -224,6 +232,7 @@ function option_6() {
     echo
     pause 'Press [Enter] key to continue...'
     sudo mysql_secure_installation
+    clear
     echo -e "${green}MySQl successfully configured${clear}"
 }
 
