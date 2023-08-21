@@ -235,9 +235,12 @@ function option_7() {
     sudo apt install phpmyadmin php-mbstring php-zip php-gd php-json php-curl
     sudo phpenmod mbstring
     sudo systemctl restart apache2
+    echo -e -n "${bg_blue}Please add an ${yello}AllowOverride All${clear} ${bg_blue}directive at ${yellow}<Directory /usr/share/phpmyadmin>${clear}"
+    echo
+    pause 'Press [Enter] key to continue...'
     sudo nano /etc/apache2/conf-available/phpmyadmin.conf
     sudo systemctl restart apache2
-    sudo wget -O /usr/share/phpmyadmin/.htaccess https://raw.github.com
+    sudo wget -O /usr/share/phpmyadmin/.htaccess https://raw.githubusercontent.com/MMilesMM/New-Server-Installation-Script/main/files/.htaccess
     echo -e -n "${bg_blue}Please enter username you want to add: "
     echo -e -n "${clear}"
     read htuser
