@@ -182,7 +182,7 @@ function option_4() {
 }
 
 #Option 5
-function option_1() {
+function option_5() {
     echo -e "${magenta}Installing Wordpress...${clear}"
 # Installtion commands
     echo -e -n "${bg_blue}Please enter the name of the domain you'll add: "
