@@ -215,7 +215,8 @@ function option_6() {
     # Installation commands
     echo -e -n "${bg_blue}Please enter in the MySQL prompt the following command:${clear}"
     echo
-    echo -e -n "${bg_yellow}ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '<change me>';${clear}"
+    echo -e -n "${yellow}ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '<change me>';${clear}"
+    echo
     pause 'Press [Enter] key to continue...'
     sudo mysql
     echo -e -n "${yellow}Running MySQL secure installation script now...${clear}"
