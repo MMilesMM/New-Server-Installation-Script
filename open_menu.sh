@@ -143,15 +143,23 @@ then
             fi
                     if [[ $REPLY =~ ^[Yy]$ ]]
                     then
-                        sudo apt install unzip -y
-                        sudo wget -P /var/www/$apachedomain https://de.wordpress.org/latest-de_DE.zip
-                        sudo unzip /var/www/$apachedomain/latest-de_DE.zip -d /var/www/$apachedomain
-                        sudo mv /var/www/$apachedomain/wordpress/* /var/www/$apachedomain
-                        sudo rm /var/www/$apachedomain/latest-de_DE.zip
-                        sudo rm -r /var/www/$apachedomain/wordpress
-                        sudo chown -R www-data:www-data /var/www
+                        WP=/var/www/$apachedomain
+                        if [ -d "$WP" ];
+                            then
+                                echo -e -n "${bg_blue}Folder already exists! Please remove the folder! Returning to main menu${clear}"
+                            else
+                                sudo apt install unzip -y
+                                sudo wget -P /var/www/$apachedomain https://de.wordpress.org/latest-de_DE.zip
+                                sudo unzip /var/www/$apachedomain/latest-de_DE.zip -d /var/www/$apachedomain
+                                sudo mv /var/www/$apachedomain/wordpress/* /var/www/$apachedomain
+                                sudo rm /var/www/$apachedomain/latest-de_DE.zip
+                                sudo rm -r /var/www/$apachedomain/wordpress
+                                sudo chown -R www-data:www-data /var/www
+                                echo -e -n "${bg_blue}Wordpress successfully installed!, returning to main menu...${clear}"
+                            fi
                     else
-                        echo -e -n "${bg_blue}Wordpress not installed, returning to main menu...${clear}"
+                            echo -e -n "${bg_blue}Wordpress not installed!, returning to main menu...${clear}"
+                        
                 fi
 
 else
