@@ -39,6 +39,7 @@ function display_menu() {
     echo "2. Install certbot with cloudflare addon"
     echo "3. Download pre-made default config for apache2 (vhost, ssl extra)"
     echo "4. Edit SSH config to allow root ssh"
+    echo "5. Install Wordpress"
     echo "5. Exit"
 }
 
@@ -146,7 +147,8 @@ then
                         WP=/var/www/$apachedomain
                         if [ -d "$WP" ];
                             then
-                                echo -e -n "${bg_blue}Folder already exists! Please remove the folder! Returning to main menu${clear}"
+                                echo -e -n "${bg_blue}Folder $WP already exists! Please remove the folder! Returning to main menu${clear}"
+                                pause 'Press [Enter] key to continue...'
                             else
                                 sudo apt install unzip -y
                                 sudo wget -P /var/www/$apachedomain https://de.wordpress.org/latest-de_DE.zip
@@ -177,6 +179,32 @@ function option_4() {
     sudo nano /etc/ssh/sshd_config
     sudo systemctl restart ssh sshd
     echo -e "${green}SSH config sucessfully configured${clear}"
+}
+
+#Option 5
+function option_1() {
+    echo -e "${magenta}Installing Wordpress...${clear}"
+# Installtion commands
+    echo -e -n "${bg_blue}Please enter the name of the domain you'll add: "
+    echo -e -n "${clear}"
+    read wordpress
+    word=/var/www/$wordpress
+    if [ -d "$wordpress" ];
+    then
+        echo -e -n "${bg_blue}Folder $wordpress already exists! Please remove the folder! Returning to main menu${clear}"
+        pause 'Press [Enter] key to continue...'
+    else
+        sudo apt install unzip -y
+        sudo wget -P /var/www/$wordpress https://de.wordpress.org/latest-de_DE.zip
+        sudo unzip /var/www/$wordpress/latest-de_DE.zip -d /var/www/$wordpress
+        sudo mv /var/www/$wordpress/wordpress/* /var/www/$wordpress
+        sudo rm /var/www/$wordpress/latest-de_DE.zip
+        sudo rm -r /var/www/$wordpress/wordpress
+        sudo chown -R www-data:www-data /var/www
+        echo -e -n "${bg_blue}Wordpress successfully installed!, returning to main menu...${clear}"
+    fi
+
+
 }
 
 # Main function
