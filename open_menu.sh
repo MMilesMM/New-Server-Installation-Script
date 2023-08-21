@@ -25,9 +25,9 @@ bg_cyan='\033[0;46m'
 # Clear the color after that
 clear='\033[0m'
 
-#Options
-command 1> /dev/null #Show console output
+
 clear #clears screen
+
 #Function
 function pause(){
    read -p "$*"
@@ -49,11 +49,11 @@ function display_menu() {
 function option_1() {
     echo "Installaling Apache, PHP and MySQL..."
     # Installation commands
-    sudo apt update && sudo apt upgrade -y
-    sudo apt install apache2 wget curl -y
-    sudo apt install php libapache2-mod-php php-mysql
-    sudo apt install php-{zip,curl,bcmath,cli,common,imap,intl,json,xml,imagick,dom,fileinfo,mbstring} -y
-    sudo apt install mysql-server -y
+    sudo apt update && sudo apt upgrade -y > /dev/null
+    sudo apt install apache2 wget curl -y > /dev/null
+    sudo apt install php libapache2-mod-php php-mysql > /dev/null
+    sudo apt install php-{zip,curl,bcmath,cli,common,imap,intl,json,xml,imagick,dom,fileinfo,mbstring} -y > /dev/null
+    sudo apt install mysql-server -y > /dev/null
     clear
     echo -e "${green}Apache,PHP and MySQL sccessfully installed! Returning to menu...${clear}"
 }
@@ -62,21 +62,21 @@ function option_1() {
 function option_2() {
     echo "Installing certbot and snap"
     # Installation commands
-    sudo apt install snapd curl wget -y
-    sudo snap install --classic certbot
-    sudo ln -s /snap/bin/certbot /usr/bin/certbot
-    sudo snap set certbot trust-plugin-with-root=ok
-    sudo snap install certbot-dns-cloudflare
+    sudo apt install snapd curl wget -y > /dev/null
+    sudo snap install --classic certbot > /dev/null
+    sudo ln -s /snap/bin/certbot /usr/bin/certbot > /dev/null
+    sudo snap set certbot trust-plugin-with-root=ok > /dev/null
+    sudo snap install certbot-dns-cloudflare > /dev/null
     echo -e -n "${bg_blue}Would you like to configure cloudlfare now? y/n"
         echo -e -n "${clear}"
         read -n 1 -r
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]
     then
-        sudo mkdir -p /root/.secrets/certbot
-        sudo wget -P /root/.secrets/certbot https://raw.githubusercontent.com/MMilesMM/New-Server-Installation-Script/main/files/cloudflare.ini
-        sudo chmod 600 /root/.secrets/certbot/cloudflare.ini
-        sudo nano /root/.secrets/certbot/cloudflare.ini
+        sudo mkdir -p /root/.secrets/certbot > /dev/null
+        sudo wget -P /root/.secrets/certbot https://raw.githubusercontent.com/MMilesMM/New-Server-Installation-Script/main/files/cloudflare.ini > /dev/null
+        sudo chmod 600 /root/.secrets/certbot/cloudflare.ini > /dev/null
+        sudo nano /root/.secrets/certbot/cloudflare.ini > /dev/null
         echo -e "${green}Certbot with cloudflare config and snap installed successfully!${clear}"
         echo -e -n "${bg_blue}Would you like to create the certificates now? y/n"
         echo -e -n "${clear}"
@@ -112,15 +112,15 @@ function option_3() {
 if [ -d "$DIR" ];
 then
     echo "$DIR directory exists."
-    sudo apt install wget curl -y
-    sudo a2enmod headers ssl rewrite actions
-    sudo systemctl restart apache2
-    sudo wget -O /etc/ssl/dhparams.pem https://raw.githubusercontent.com/MMilesMM/New-Server-Installation-Script/main/files/dhparams.pem
-    sudo wget -O /etc/letsencrypt/options-ssl-apache.conf https://raw.githubusercontent.com/MMilesMM/New-Server-Installation-Script/main/files/options-ssl-apache.conf
-    sudo wget -O /etc/apache2/conf-available/security.conf https://raw.githubusercontent.com/MMilesMM/New-Server-Installation-Script/main/files/security.conf
-    sudo wget -O /etc/apache2/sites-available/default_vhost.conf https://raw.githubusercontent.com/MMilesMM/New-Server-Installation-Script/main/files/default_vhost.conf
-    sudo a2enconf security.conf
-    sudo systemctl restart apache2
+    sudo apt install wget curl -y > /dev/null
+    sudo a2enmod headers ssl rewrite actions > /dev/null
+    sudo systemctl restart apache2 > /dev/null
+    sudo wget -O /etc/ssl/dhparams.pem https://raw.githubusercontent.com/MMilesMM/New-Server-Installation-Script/main/files/dhparams.pem > /dev/null
+    sudo wget -O /etc/letsencrypt/options-ssl-apache.conf https://raw.githubusercontent.com/MMilesMM/New-Server-Installation-Script/main/files/options-ssl-apache.conf > /dev/null
+    sudo wget -O /etc/apache2/conf-available/security.conf https://raw.githubusercontent.com/MMilesMM/New-Server-Installation-Script/main/files/security.conf > /dev/null
+    sudo wget -O /etc/apache2/sites-available/default_vhost.conf https://raw.githubusercontent.com/MMilesMM/New-Server-Installation-Script/main/files/default_vhost.conf > /dev/null
+    sudo a2enconf security.conf > /dev/null
+    sudo systemctl restart apache2 > /dev/null
     clear
     echo -e "${green}Apache config installed!${clear}"
     echo -e -n "${bg_blue}Would you like to edit the default config? y/n"
@@ -132,15 +132,15 @@ then
                 echo -e -n "${bg_blue}Please enter the name of the domain you'll add: "
                 echo -e -n "${clear}"
                 read apachedomain
-                sudo mkdir -p /var/www/$apachedomain
-                sudo chown -R www-data:www-data /var/www
-                sudo cp /etc/apache2/sites-available/default_vhost.conf /etc/apache2/sites-available/$apachedomain.conf
+                sudo mkdir -p /var/www/$apachedomain > /dev/null
+                sudo chown -R www-data:www-data /var/www > /dev/null
+                sudo cp /etc/apache2/sites-available/default_vhost.conf /etc/apache2/sites-available/$apachedomain.conf > /dev/null
                 sudo nano /etc/apache2/sites-available/$apachedomain.conf
                 echo -e "${bg_blue}Please edit the apache2 config and AllowOverride All for the /var/www directory${clear}"
                 pause 'Press [Enter] key to continue...'
                 sudo nano /etc/apache2/apache2.conf
-                sudo a2ensite $apachedomain
-                sudo systemctl reload apache2
+                sudo a2ensite $apachedomain > /dev/null
+                sudo systemctl reload apache2 > /dev/null
                 echo -e "${green}Domain added and apache reloaded!${clear}"
                 echo -e -n "${bg_blue}Would you like to download the newest Wordpress install? y/n"
                 echo -e -n "${clear}"
@@ -155,13 +155,13 @@ then
                                 echo -e -n "${bg_blue}Folder $WP already exists! Please remove the folder! Returning to main menu${clear}"
                                 pause 'Press [Enter] key to continue...'
                             else
-                                sudo apt install unzip -y
-                                sudo wget -P /var/www/$apachedomain https://de.wordpress.org/latest-de_DE.zip
-                                sudo unzip /var/www/$apachedomain/latest-de_DE.zip -d /var/www/$apachedomain
-                                sudo mv /var/www/$apachedomain/wordpress/* /var/www/$apachedomain
-                                sudo rm /var/www/$apachedomain/latest-de_DE.zip
-                                sudo rm -r /var/www/$apachedomain/wordpress
-                                sudo chown -R www-data:www-data /var/www
+                                sudo apt install unzip -y > /dev/null
+                                sudo wget -P /var/www/$apachedomain https://de.wordpress.org/latest-de_DE.zip > /dev/null
+                                sudo unzip /var/www/$apachedomain/latest-de_DE.zip -d /var/www/$apachedomain > /dev/null
+                                sudo mv /var/www/$apachedomain/wordpress/* /var/www/$apachedomain > /dev/null
+                                sudo rm /var/www/$apachedomain/latest-de_DE.zip > /dev/null
+                                sudo rm -r /var/www/$apachedomain/wordpress > /dev/null
+                                sudo chown -R www-data:www-data /var/www > /dev/null
                                 clear
                                 echo -e -n "${bg_blue}Wordpress successfully installed!, returning to main menu...${clear}"
                             fi
@@ -185,7 +185,7 @@ function option_4() {
     echo "Opening SSH config..."
     # Installation commands
     sudo nano /etc/ssh/sshd_config
-    sudo systemctl restart ssh sshd
+    sudo systemctl restart ssh sshd > /dev/null
     clear
     echo -e "${green}SSH config sucessfully configured${clear}"
 }
@@ -206,13 +206,13 @@ function option_5() {
         echo
         pause 'Press [Enter] key to continue...'
     else
-        sudo apt install unzip -y
-        sudo wget -P /var/www/$wordpress https://de.wordpress.org/latest-de_DE.zip
-        sudo unzip -q /var/www/$wordpress/latest-de_DE.zip -d /var/www/$wordpress
-        sudo mv /var/www/$wordpress/wordpress/* /var/www/$wordpress
-        sudo rm /var/www/$wordpress/latest-de_DE.zip
-        sudo rm -r /var/www/$wordpress/wordpress
-        sudo chown -R www-data:www-data /var/www
+        sudo apt install unzip -y > /dev/null
+        sudo wget -P /var/www/$wordpress https://de.wordpress.org/latest-de_DE.zip > /dev/null
+        sudo unzip -q /var/www/$wordpress/latest-de_DE.zip -d /var/www/$wordpress > /dev/null
+        sudo mv /var/www/$wordpress/wordpress/* /var/www/$wordpress > /dev/null
+        sudo rm /var/www/$wordpress/latest-de_DE.zip > /dev/null
+        sudo rm -r /var/www/$wordpress/wordpress > /dev/null
+        sudo chown -R www-data:www-data /var/www > /dev/null
         clear
         echo -e -n "${bg_blue}Wordpress successfully installed!, returning to main menu...${clear}"
     fi
@@ -240,21 +240,21 @@ function option_6() {
 function option_7() {
     echo "Installing and configuring PhpMyAdmin"
     # Installation commands
-    sudo apt update && sudo apt upgrade -y
-    sudo apt install phpmyadmin php-mbstring php-zip php-gd php-json php-curl -y
-    sudo phpenmod mbstring
-    sudo systemctl restart apache2
+    sudo apt update && sudo apt upgrade -y > /dev/null
+    sudo apt install phpmyadmin php-mbstring php-zip php-gd php-json php-curl -y > /dev/null
+    sudo phpenmod mbstring > /dev/null
+    sudo systemctl restart apache2 > /dev/null
     echo -e -n "${bg_blue}Please add an ${yellow}AllowOverride All${clear}${bg_blue}directive at ${yellow}<Directory /usr/share/phpmyadmin>${clear}"
     echo
     pause 'Press [Enter] key to continue...'
     sudo nano /etc/apache2/conf-available/phpmyadmin.conf
-    sudo systemctl restart apache2
+    sudo systemctl restart apache2 > /dev/null
     sudo wget -O /usr/share/phpmyadmin/.htaccess https://raw.githubusercontent.com/MMilesMM/New-Server-Installation-Script/main/files/.htaccess
     echo -e -n "${bg_blue}Please enter username you want to add: "
     echo -e -n "${clear}"
     read htuser
     sudo htpasswd -c /etc/phpmyadmin/.htpasswd $htuser
-    sudo systemctl restart apache2
+    sudo systemctl restart apache2 > /dev/null
     clear
     echo -e "${green}PhPMyAdmin installed! Returning to menu...${clear}"
 }
