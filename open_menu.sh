@@ -189,14 +189,14 @@ function option_5() {
     echo -e -n "${clear}"
     read wordpress
     word=/var/www/$wordpress
-    if [ -d "$wordpress" ];
+    if [ -d "$word" ];
     then
-        echo -e -n "${bg_blue}Folder $wordpress already exists! Please remove the folder! Returning to main menu${clear}"
+        echo -e -n "${bg_blue}Folder $word already exists! Please remove the folder! Returning to main menu${clear}"
         pause 'Press [Enter] key to continue...'
     else
         sudo apt install unzip -y
         sudo wget -P /var/www/$wordpress https://de.wordpress.org/latest-de_DE.zip
-        sudo unzip /var/www/$wordpress/latest-de_DE.zip -d /var/www/$wordpress
+        sudo unzip -q /var/www/$wordpress/latest-de_DE.zip -d /var/www/$wordpress
         sudo mv /var/www/$wordpress/wordpress/* /var/www/$wordpress
         sudo rm /var/www/$wordpress/latest-de_DE.zip
         sudo rm -r /var/www/$wordpress/wordpress
