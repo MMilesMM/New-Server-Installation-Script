@@ -40,7 +40,7 @@ function display_menu() {
     echo "3. Download pre-made default config for apache2 (vhost, ssl extra)"
     echo "4. Edit SSH config to allow root ssh"
     echo "5. Install Wordpress"
-    echo "5. Exit"
+    echo "0. Exit"
 }
 
 # Option 1
@@ -226,6 +226,9 @@ function main() {
                 option_4
                 ;;
             5)
+                option_5
+                ;;
+            0)
                 echo -e "${red}Exiting...${clear}"
                 break
                 ;;
