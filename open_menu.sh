@@ -41,6 +41,7 @@ function display_menu() {
     echo "4. Edit SSH config to allow root ssh"
     echo "5. Install Wordpress"
     echo "6. Configure MySQL"
+    echo "7. Install and configure PhPMyAdmin"
     echo "0. Exit"
 }
 
@@ -215,14 +216,36 @@ function option_6() {
     # Installation commands
     echo -e -n "${bg_blue}Please enter in the MySQL prompt the following command:${clear}"
     echo
-    echo -e -n "${yellow}ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '<change me>';${clear}"
+    echo -e -n "${yellow}ALTER USER 'root'@'localhost' IDENTIFIED WITH caching_sha2_password BY '<change me>';${clear}"
     echo
     pause 'Press [Enter] key to continue...'
     sudo mysql
     echo -e -n "${yellow}Running MySQL secure installation script now...${clear}"
+    echo
+    pause 'Press [Enter] key to continue...'
     sudo mysql_secure_installation
     echo -e "${green}MySQl successfully configured${clear}"
 }
+
+# Option 7
+function option_7() {
+    echo "Installing and configuring PhpMyAdmin"
+    # Installation commands
+    sudo apt update && sudo apt upgrade -y
+    sudo apt install phpmyadmin php-mbstring php-zip php-gd php-json php-curl
+    sudo phpenmod mbstring
+    sudo systemctl restart apache2
+    sudo nano /etc/apache2/conf-available/phpmyadmin.conf
+    sudo systemctl restart apache2
+    sudo wget -O /usr/share/phpmyadmin/.htaccess https://raw.github.com
+    echo -e -n "${bg_blue}Please enter username you want to add: "
+    echo -e -n "${clear}"
+    read htuser
+    sudo htpasswd -c /etc/phpmyadmin/.htpasswd $htuser
+    sudo systemctl restart apache2
+    echo -e "${green}PhPMyAdmin installed! Returning to menu...${clear}"
+}
+
 
 # Main function
 function main() {
@@ -247,7 +270,10 @@ function main() {
                 ;;
             6)
                 option_6
-                ;;    
+                ;;
+            7)
+                option_7
+                ;;          
             0)
                 echo -e "${red}Exiting...${clear}"
                 break
