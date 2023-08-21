@@ -40,6 +40,7 @@ function display_menu() {
     echo "3. Download pre-made default config for apache2 (vhost, ssl extra)"
     echo "4. Edit SSH config to allow root ssh"
     echo "5. Install Wordpress"
+    echo "6. Configure MySQL"
     echo "0. Exit"
 }
 
@@ -192,6 +193,7 @@ function option_5() {
     if [ -d "$word" ];
     then
         echo -e -n "${bg_blue}Folder $word already exists! Please remove the folder! Returning to main menu${clear}"
+        echo
         echo -e "${magenta}Returning to main menu...${clear}"
         echo
         pause 'Press [Enter] key to continue...'
@@ -205,8 +207,20 @@ function option_5() {
         sudo chown -R www-data:www-data /var/www
         echo -e -n "${bg_blue}Wordpress successfully installed!, returning to main menu...${clear}"
     fi
+}
 
-
+# Option 6
+function option_6() {
+    echo "Editing MySQL config..."
+    # Installation commands
+    echo -e -n "${bg_blue}Please enter in the MySQL prompt the following command:${clear}"
+    echo
+    echo -e -n "${bg_yellow}ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '<change me>';${clear}"
+    pause 'Press [Enter] key to continue...'
+    sudo mysql
+    echo -e -n "${yellow}Running MySQL secure installation script now...${clear}"
+    sudo mysql_secure_installation
+    echo -e "${green}MySQl successfully configured${clear}"
 }
 
 # Main function
@@ -230,6 +244,9 @@ function main() {
             5)
                 option_5
                 ;;
+            6)
+                option_6
+                ;;    
             0)
                 echo -e "${red}Exiting...${clear}"
                 break
