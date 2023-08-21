@@ -27,7 +27,7 @@ clear='\033[0m'
 
 #Options
 command 1> /dev/null #Show console output
-
+clear #clears screen
 #Function
 function pause(){
    read -p "$*"
