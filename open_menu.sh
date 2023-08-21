@@ -232,10 +232,10 @@ function option_7() {
     echo "Installing and configuring PhpMyAdmin"
     # Installation commands
     sudo apt update && sudo apt upgrade -y
-    sudo apt install phpmyadmin php-mbstring php-zip php-gd php-json php-curl
+    sudo apt install phpmyadmin php-mbstring php-zip php-gd php-json php-curl -y
     sudo phpenmod mbstring
     sudo systemctl restart apache2
-    echo -e -n "${bg_blue}Please add an ${yello}AllowOverride All${clear} ${bg_blue}directive at ${yellow}<Directory /usr/share/phpmyadmin>${clear}"
+    echo -e -n "${bg_blue}Please add an ${yellow}AllowOverride All${clear}${bg_blue}directive at ${yellow}<Directory /usr/share/phpmyadmin>${clear}"
     echo
     pause 'Press [Enter] key to continue...'
     sudo nano /etc/apache2/conf-available/phpmyadmin.conf
@@ -254,7 +254,7 @@ function option_7() {
 function main() {
     while true; do
         display_menu
-        read -p "Enter your choice (1-5): " choice
+        read -p "Enter your choice (0-7): " choice
         case $choice in
             1)
                 option_1
@@ -282,6 +282,7 @@ function main() {
                 break
                 ;;
             *)
+                clear
                 echo -e "${red}Invalid choice. Please try again.${clear}"
                 ;;
         esac
