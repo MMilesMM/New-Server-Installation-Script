@@ -90,7 +90,7 @@ function option_2() {
                 sudo certbot certonly \
                 --dns-cloudflare \
                 --dns-cloudflare-credentials /root/.secrets/certbot/cloudflare.ini \
-                --dns-cloudflare-propagation-seconds 15 \
+                --dns-cloudflare-propagation-seconds 25 \
                 -d $domain \
                 -d *.$domain
                 clear
